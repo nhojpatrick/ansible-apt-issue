@@ -1,0 +1,34 @@
+
+---
+
+#- shell: apt-get update warn=no
+#  become: true
+#
+#- name: apt upgrade
+#  shell: apt-get upgrade --yes warn=no
+#  become: true
+#
+#- name: apt autoremove
+#  shell: apt-get autoremove warn=no
+#  become: true
+#
+#- name: apt clean
+#  shell: apt-get clean warn=no
+#  become: true
+
+- name: Mysql questions
+  debconf:
+    name: mysql-server-5.7
+    question: "{{ item.question }}"
+    value: "{{ item.value }}"
+    vtype: password
+  become: true
+  with_items:
+    - { question: "mysql-server/root_password", value: "{{ mysql_dba_password }}" }
+    - { question: "mysql-server/root_password_again", value: "{{ mysql_dba_password }}" }
+
+- name: Install mysql server - ansible module
+  apt:
+    name: mysql-server
+    state: present
+  become: true

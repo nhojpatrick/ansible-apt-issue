@@ -1,0 +1,17 @@
+
+---
+
+- name: Mysql questions
+  debconf:
+    name: mysql-server-5.7
+    question: "{{ item.question }}"
+    value: "{{ item.value }}"
+    vtype: password
+  become: true
+  with_items:
+    - { question: "mysql-server/root_password", value: "{{ mysql_dba_password }}" }
+    - { question: "mysql-server/root_password_again", value: "{{ mysql_dba_password }}" }
+
+- name: Install mysql server - shell
+  shell: apt install mysql-server --yes
+  become: true
