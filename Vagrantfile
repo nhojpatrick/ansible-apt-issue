@@ -27,6 +27,7 @@ Vagrant.configure("2") do |config|
 		inst.vm.hostname = "ansible-apt-module"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/ansible-apt-module.yaml"
+			ansible.verbose = true
 		end
 	end
 
@@ -34,6 +35,7 @@ Vagrant.configure("2") do |config|
 		inst.vm.hostname = "ansible-shell-module"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/ansible-shell-module.yaml"
+			ansible.verbose = true
 		end
 	end
 
@@ -41,6 +43,7 @@ Vagrant.configure("2") do |config|
 		inst.vm.hostname = "shell"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/shell.yaml"
+			ansible.verbose = true
 		end
 		inst.vm.provision "apt-install-mysql-server", type: "shell" do |s|
 			s.privileged = false

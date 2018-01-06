@@ -1,2 +1,2 @@
+*.log
 .vagrant/
-ubuntu-*-cloudimg-console.log
