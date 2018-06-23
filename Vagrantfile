@@ -20,7 +20,8 @@ Vagrant.configure("2") do |config|
 
 #	config.vm.box = "ubuntu/xenial64" # 16.04
 #	config.vm.box = "ubuntu/zesty64" # 17.04
-	config.vm.box = "ubuntu/artful64" # 17.10
+#	config.vm.box = "ubuntu/artful64" # 17.10
+	config.vm.box = "ubuntu/bionic64" # 18.04
 
 	config.vm.boot_timeout = 600
 
