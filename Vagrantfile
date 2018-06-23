@@ -19,7 +19,8 @@ Vagrant.configure("2") do |config|
 	end
 
 #	config.vm.box = "ubuntu/xenial64" # 16.04
-	config.vm.box = "ubuntu/zesty64" # 17.04
+#	config.vm.box = "ubuntu/zesty64" # 17.04
+	config.vm.box = "ubuntu/artful64" # 17.10
 
 	config.vm.boot_timeout = 600
 
@@ -27,7 +28,8 @@ Vagrant.configure("2") do |config|
 		inst.vm.hostname = "ansible-apt-module"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/ansible-apt-module.yaml"
-			ansible.verbose = true
+			#ansible.verbose = true
+			ansible.verbose = "-vvvv"
 		end
 	end
 
