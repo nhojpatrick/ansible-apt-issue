@@ -54,4 +54,7 @@ Vagrant.configure("2") do |config|
 		end
 	end
 
+	config.vm.define "manual", autostart: false do |inst|
+	end
+
 end
