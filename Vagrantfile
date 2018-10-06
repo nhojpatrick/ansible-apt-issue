@@ -15,7 +15,9 @@ Vagrant.configure("2") do |config|
 
 	config.vm.provider :virtualbox do |vb|
 		vb.gui = false
-		vb.customize ["modifyvm", :id, "--memory", "384"]
+		#vb.customize ["modifyvm", :id, "--memory", "535"]# works
+		#vb.customize ["modifyvm", :id, "--memory", "534"]# fails
+		vb.customize ["modifyvm", :id, "--memory", "640"]
 	end
 
 #	config.vm.box = "ubuntu/xenial64" # 16.04
@@ -25,36 +27,33 @@ Vagrant.configure("2") do |config|
 
 	config.vm.boot_timeout = 600
 
-	config.vm.define "ansible-apt-module", autostart: false do |inst|
+	config.vm.define "ansible-apt-module", autostart: true do |inst|
 		inst.vm.hostname = "ansible-apt-module"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/ansible-apt-module.yaml"
 			#ansible.verbose = true
-			ansible.verbose = "-vvvv"
+			#ansible.verbose = "-vvvv"
 		end
 	end
 
-	config.vm.define "ansible-shell-module", autostart: false do |inst|
+	config.vm.define "ansible-shell-module", autostart: true do |inst|
 		inst.vm.hostname = "ansible-shell-module"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/ansible-shell-module.yaml"
-			ansible.verbose = true
+			#ansible.verbose = true
 		end
 	end
 
-	config.vm.define "shell", autostart: false do |inst|
+	config.vm.define "shell", autostart: true do |inst|
 		inst.vm.hostname = "shell"
 		inst.vm.provision :ansible_local do |ansible|
 			ansible.playbook = "provisioning/shell.yaml"
-			ansible.verbose = true
+			#ansible.verbose = true
 		end
 		inst.vm.provision "apt-install-mysql-server", type: "shell" do |s|
 			s.privileged = false
 			s.inline = "sudo apt install mysql-server --yes"
 		end
-	end
-
-	config.vm.define "manual", autostart: false do |inst|
 	end
 
 end
